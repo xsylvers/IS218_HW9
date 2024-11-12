@@ -24,7 +24,8 @@ You will only get 100 if the entire QR program passes GitHub actions, so you wil
 2.  [Listen to someone else explain FastAPI and go through a project](https://www.youtube.com/watch?v=cbASjoZZGIw)
 
 # Install
-1. Clone this repo to your local machine.
+1. Fork my repo on Github. Then clone YOUR new repo to your local machine: `git clone git@github.com:XXX/qr_code_api_broken_code.git` (replace XXX to your github username).
+
 2. Make virtual environment:  `python3 -m venv venv`
 3. Activate virtual environment: `source venv/bin/activate`
 4. Install requirements: `pip install -r requirements.txt`
