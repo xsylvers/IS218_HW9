@@ -40,24 +40,28 @@ def generate_qr_code(data: str, path: Path, fill_color: str = 'red', back_color:
         qr.add_data(data)
         qr.make(fit=True)
         img = qr.make_image(fill_color=fill_color, back_color=back_color)
-        img.save(str(path))
+        img.save(path)
         logging.info(f"QR code successfully saved to {path}")
     except Exception as e:
         logging.error(f"Failed to generate/save QR code: {e}")
         raise
 
-def delete_qr_cde(file_path: Path):
+def delete_qr_code(file_path: Path):
     """
     Deletes the specified QR code image file.
     Parameters:
     - file_path (Path): The filesystem path of the QR code image to delete.
     """
-    if file_path.is_file():
-        file_path.unlink()  # Delete the file
-        logging.info(f"QR code {file_path.name} deleted successfully")
-    else:
-        logging.error(f"QR code {file_path.name} not found for deletion")
-        raise FileNotFoundError(f"QR code {file_path.name} not found")
+    try:
+        if file_path.is_file():
+            file_path.unlink()  # Delete the file
+            logging.info(f"QR code {file_path.name} deleted successfully")
+        else:
+            logging.error(f"QR code {file_path.name} not found for deletion")
+            raise FileNotFoundError(f"QR code {file_path.name} not found")
+    except Exception as e:
+        logging.error(f"Failed to delete QR code: {e}")
+        raise
 
 def create_directory(directory_path: Path):
     """
@@ -68,8 +72,7 @@ def create_directory(directory_path: Path):
     logging.debug('Attempting to create directory')
     try:
         directory_path.mkdir(parents=True, exist_ok=True)  # Create the directory and any parent directories
-    except FileExistsError:
-        logging.info(f"Directory already exists: {directory_path}")
+        logging.info(f"Directory created or already exists: {directory_path}")
     except PermissionError as e:
         logging.error(f"Permission denied when trying to create directory {directory_path}: {e}")
         raise
